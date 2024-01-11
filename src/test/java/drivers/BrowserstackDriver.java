@@ -34,8 +34,7 @@ public class BrowserstackDriver implements WebDriverProvider {
         caps.setCapability("name", "first_test");
 
 
-        // Initialise the remote Webdriver using BrowserStack remote URL
-        // and desired capabilities defined above
+        // Initialise the remote Webdriver using BrowserStack remote URL with desired capabilities defined above
         try {
             return new RemoteWebDriver(
                     new URL("https://hub.browserstack.com/wd/hub"), caps);
