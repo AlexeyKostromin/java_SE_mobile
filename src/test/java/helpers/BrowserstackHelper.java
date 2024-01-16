@@ -9,13 +9,12 @@ import static io.restassured.RestAssured.given;
 
 public class BrowserstackHelper {
 
-    public static URL getBrowserstackUrl(){
+    public static URL getBrowserstackUrl() {
         try {
             return new URL("https://" + bsLogin + ":" + bsPassword + "@hub-cloud.browserstack.com/wd/hub");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static String getVideoUrl(String sessionId) {

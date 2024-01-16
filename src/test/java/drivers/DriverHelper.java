@@ -9,17 +9,17 @@ import static helpers.EnvironmentHelper.isIos;
 
 public class DriverHelper {
 
-public static void configureSelenide(){
-    addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+    public static void configureSelenide() {
+        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
-    if(isAndroid || isIos){
-        Configuration.browser = MobileDriver.class.getName();
-        Configuration.browserSize = null;
+        if (isAndroid || isIos) {
+            Configuration.browser = MobileDriver.class.getName();
+            Configuration.browserSize = null;
+        }
+        Configuration.timeout = 10000;
+
+
     }
-    Configuration.timeout = 10000;
-
-
-}
 
 
 }

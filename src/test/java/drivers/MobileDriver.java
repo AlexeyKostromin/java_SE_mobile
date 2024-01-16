@@ -19,7 +19,7 @@ public class MobileDriver implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        if(isAndroid){
+        if (isAndroid) {
             return getAndroidDriver();
         } else if (isIos) {
             return getIosDriver();
@@ -28,7 +28,7 @@ public class MobileDriver implements WebDriverProvider {
         }
     }
 
-    private DesiredCapabilities commonCapabilities(){
+    private DesiredCapabilities commonCapabilities() {
         //MutableCapabilities caps = new MutableCapabilities();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("project", "autotests.mobile");
@@ -39,24 +39,23 @@ public class MobileDriver implements WebDriverProvider {
         return capabilities;
     }
 
+    public AndroidDriver getAndroidDriver() {
+        DesiredCapabilities capabilities = commonCapabilities();
+        capabilities.setCapability("deviceName", androidDevice);
+        capabilities.setCapability("os_version", androidVersion);
+        //capabilities.setCapability("platformVersion", androidVersion);
+        capabilities.setCapability("app", androidAppBrowserstack);
 
-public AndroidDriver getAndroidDriver(){
-    DesiredCapabilities capabilities = commonCapabilities();
-    capabilities.setCapability("deviceName", androidDevice);
-    capabilities.setCapability("os_version", androidVersion);
-    //capabilities.setCapability("platformVersion", androidVersion);
-    capabilities.setCapability("app", androidAppBrowserstack);
+        return new AndroidDriver(getBrowserstackUrl(), capabilities);
+    }
 
-    return new AndroidDriver(getBrowserstackUrl(), capabilities);
-}
+    public IOSDriver getIosDriver() {
+        DesiredCapabilities capabilities = commonCapabilities();
+        capabilities.setCapability("deviceName", iosDevice);
+        capabilities.setCapability("os_version", iosVersion);
+        capabilities.setCapability("app", iosAppBrowserstack);
 
-public IOSDriver getIosDriver(){
-    DesiredCapabilities capabilities = commonCapabilities();
-    capabilities.setCapability("deviceName", iosDevice);
-    capabilities.setCapability("os_version", iosVersion);
-    capabilities.setCapability("app", iosAppBrowserstack);
-
-    return new IOSDriver(getBrowserstackUrl(), capabilities);
-}
+        return new IOSDriver(getBrowserstackUrl(), capabilities);
+    }
 
 }
