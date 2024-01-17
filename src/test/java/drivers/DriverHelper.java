@@ -4,8 +4,8 @@ import com.codeborne.selenide.Configuration;
 import io.qameta.allure.selenide.AllureSelenide;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
-import static helpers.EnvironmentHelper.isAndroid;
-import static helpers.EnvironmentHelper.isIos;
+import static helpers.EnvironmentHelper_old.isAndroid;
+import static helpers.EnvironmentHelper_old.isIos;
 
 public class DriverHelper {
 

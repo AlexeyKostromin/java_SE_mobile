@@ -1,6 +1,6 @@
 package helpers;
 
-public class EnvironmentHelper {
+public class EnvironmentHelper_old {
 
 //    public final static String platform = System.getProperty("platform", "android");
     public final static String platform = System.getProperty("platform", "ios");

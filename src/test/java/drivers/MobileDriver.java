@@ -4,14 +4,13 @@ import com.codeborne.selenide.WebDriverProvider;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.annotation.Nonnull;
 
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
-import static helpers.EnvironmentHelper.*;
+import static helpers.EnvironmentHelper_old.*;
 
 public class MobileDriver implements WebDriverProvider {
 
