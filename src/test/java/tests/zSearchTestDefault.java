@@ -13,7 +13,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
-public class SearchTestDefault {
+public class zSearchTestDefault {
     @Test
     void successfulSearchTest() throws MalformedURLException, InterruptedException {
 

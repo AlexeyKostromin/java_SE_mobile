@@ -1,61 +1,55 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.BrowserstackConfig;
+import config.ConfigBase;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.annotation.Nonnull;
 
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
-import static helpers.EnvironmentHelper_old.*;
 
 public class MobileDriver implements WebDriverProvider {
 
+    private static BrowserstackConfig config;
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        if (isAndroid) {
-            return getAndroidDriver();
-        } else if (isIos) {
-            return getIosDriver();
+        config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
+
+//        BrowserstackConfig config = new ConfigBase().getConfig();
+
+        MutableCapabilities caps = new MutableCapabilities();
+        caps.setCapability("project", "autotests.mobile");
+        caps.setCapability("build", "jobBaseName");
+        //capabilities.setCapability("name", "Tests - " + platform + " - " + buildNumber);
+        caps.setCapability("name", "Tests - on platform1 with buildNumber1");
+        caps.setCapability("autoGrantPermissions", "true");
+
+        caps.setCapability("deviceName", config.device());
+        caps.setCapability("os_version", config.osVersion());
+        caps.setCapability("app", config.app());
+
+        if (config.osType().equals("android")) {
+            return getAndroidDriver(caps);
+        } else if (config.osType().equals("ios")) {
+            return getIosDriver(caps);
         } else {
             return null;
         }
     }
 
-    private DesiredCapabilities commonCapabilities() {
-        //MutableCapabilities caps = new MutableCapabilities();
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("project", "autotests.mobile");
-        capabilities.setCapability("build", "jobBaseName");
-        //capabilities.setCapability("name", "Tests - " + platform + " - " + buildNumber);
-        capabilities.setCapability("name", "Tests - on platform1 with buildNumber1");
-        capabilities.setCapability("autoGrantPermissions", "true");
-
-        return capabilities;
+    public AndroidDriver getAndroidDriver(MutableCapabilities caps) {
+        return new AndroidDriver(getBrowserstackUrl(), caps);
     }
 
-    public AndroidDriver getAndroidDriver() {
-        DesiredCapabilities capabilities = commonCapabilities();
-        capabilities.setCapability("deviceName", androidDevice);
-        capabilities.setCapability("os_version", androidVersion);
-        //capabilities.setCapability("platformVersion", androidVersion);
-        capabilities.setCapability("app", androidAppBrowserstack);
-
-        return new AndroidDriver(getBrowserstackUrl(), capabilities);
+    public IOSDriver getIosDriver(MutableCapabilities caps) {
+        return new IOSDriver(getBrowserstackUrl(), caps);
     }
-
-    public IOSDriver getIosDriver() {
-        DesiredCapabilities capabilities = commonCapabilities();
-        capabilities.setCapability("deviceName", iosDevice);
-        capabilities.setCapability("os_version", iosVersion);
-        capabilities.setCapability("app", iosAppBrowserstack);
-
-        return new IOSDriver(getBrowserstackUrl(), capabilities);
-    }
-
 }

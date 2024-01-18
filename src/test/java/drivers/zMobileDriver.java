@@ -10,16 +10,21 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import javax.annotation.Nonnull;
 
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
-import static helpers.EnvironmentHelper_old.*;
+import static helpers.zEnvironmentHelper.*;
 
-public class MobileDriver2 implements WebDriverProvider {
+public class zMobileDriver implements WebDriverProvider {
 
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+        if (isAndroid) {
             return getAndroidDriver();
-
+        } else if (isIos) {
+            return getIosDriver();
+        } else {
+            return null;
+        }
     }
 
     private DesiredCapabilities commonCapabilities() {

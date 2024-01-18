@@ -36,16 +36,6 @@ public class AttachHelper {
     }
 
     //curl -u "alexq_SgYyvP:wnUAtVceBCst1TsscWax" -X GET "https://api.browserstack.com/app-automate/sessions/<session-id>.json"
-//curl -u alexq_SgYyvP:wnUAtVceBCst1TsscWax -X GET https://api.browserstack.com/app-automate/sessions/a88bb4233b521a7fcee16b2496dc16b36cad54e5.json
+    //curl -u alexq_SgYyvP:wnUAtVceBCst1TsscWax -X GET https://api.browserstack.com/app-automate/sessions/a88bb4233b521a7fcee16b2496dc16b36cad54e5.json
 
-//    public static URL getVideoUrl() {
-//        var remoteDriverUrl = System.getProperty("remoteDriverUrl");
-//        String videoUrl = "https://" + remoteDriverUrl + "/video/" + sessionId() + ".mp4";
-//        try {
-//            return new URL(videoUrl);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 }

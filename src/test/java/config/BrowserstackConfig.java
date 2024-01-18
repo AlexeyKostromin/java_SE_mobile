@@ -16,6 +16,9 @@ public interface BrowserstackConfig extends Config{
         @Key("mobileDevice")
         String device();
 
+        @Key("osType")
+        String osType();
+
         @Key("osVersion")
         String osVersion();
 

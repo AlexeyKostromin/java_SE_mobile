@@ -11,15 +11,6 @@ import static io.restassured.RestAssured.given;
 public class BrowserstackHelper {
     static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
 
-    public static URL getBrowserstackUrl2() {
-        try {
-            //return new URL("https://" + bsLogin + ":" + bsPassword + "@hub-cloud.browserstack.com/wd/hub");
-            return new URL("https://" + config.user() + ":" + config.key() + "@hub-cloud.browserstack.com/wd/hub");
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static URL getBrowserstackUrl() {
         try {
             return new URL("https://" + config.user() + ":" + config.key() + "@hub.browserstack.com/wd/hub");

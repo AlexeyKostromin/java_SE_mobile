@@ -11,7 +11,7 @@ import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.appium.java_client.AppiumBy.id;
 import static io.qameta.allure.Allure.step;
 
-public class SearchTest extends TestBase {
+public class zSearchTest extends TestBase {
     @Test
     void successfulSearchTest() throws MalformedURLException, InterruptedException {
         step("Type search", () -> {
