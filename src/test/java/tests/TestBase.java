@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import drivers.BrowserstackDriver;
 import drivers.BrowserstackDriver_new;
 //import helpers.AttachHelper;
+import drivers.DriverHelper;
 import helpers.AttachHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -17,21 +18,22 @@ import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
 public class TestBase {
 
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browser = BrowserstackDriver_new.class.getName();
-        Configuration.browserSize = null;
-        Configuration.timeout = 10000;
-    }
 //    @BeforeAll
 //    static void beforeAll() {
-//        DriverHelper.configureSelenide();
+//        Configuration.browser = BrowserstackDriver_new.class.getName();
+//        Configuration.browserSize = null;
+//        Configuration.timeout = 10000;
 //    }
+    @BeforeAll
+    static void beforeAll() {
+        //DriverHelper.configureSelenide();
+        DriverHelper.configureSelenide2();
+    }
 
     @BeforeEach
     void beforeEach() {
         //SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+        //addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         open();
     }
 
@@ -40,7 +42,7 @@ public class TestBase {
         String sessionId = Selenide.sessionId().toString();
         System.out.println(sessionId);
 
-        //AttachHelper.takeScreenshotAs("Last screenshot");
+        AttachHelper.takeScreenshotAs("Last screenshot");
         AttachHelper.pageSource();
         closeWebDriver();
         AttachHelper.addVideo(sessionId);

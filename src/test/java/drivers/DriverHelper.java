@@ -13,13 +13,21 @@ public class DriverHelper {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
         if (isAndroid || isIos) {
-            Configuration.browser = MobileDriver.class.getName();
+            //Configuration.browser = MobileDriver.class.getName();
+            Configuration.browser = BrowserstackDriver_new.class.getName();
             Configuration.browserSize = null;
         }
         Configuration.timeout = 10000;
-
-
     }
+    public static void configureSelenide2() {
+        addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
+
+//            Configuration.browser = MobileDriver2.class.getName();
+            Configuration.browser = BrowserstackDriver_new2.class.getName();
+            Configuration.browserSize = null;
+
+        Configuration.timeout = 10000;
+    }
 
 }

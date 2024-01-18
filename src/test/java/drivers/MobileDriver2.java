@@ -12,19 +12,14 @@ import javax.annotation.Nonnull;
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
 import static helpers.EnvironmentHelper_old.*;
 
-public class MobileDriver implements WebDriverProvider {
+public class MobileDriver2 implements WebDriverProvider {
 
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        if (isAndroid) {
             return getAndroidDriver();
-        } else if (isIos) {
-            return getIosDriver();
-        } else {
-            return null;
-        }
+
     }
 
     private DesiredCapabilities commonCapabilities() {
