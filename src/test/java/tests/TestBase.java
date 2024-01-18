@@ -40,7 +40,7 @@ public class TestBase {
         String sessionId = Selenide.sessionId().toString();
         System.out.println(sessionId);
 
-        AttachHelper.takeScreenshotAs("Last screenshot");
+        //AttachHelper.takeScreenshotAs("Last screenshot");
         AttachHelper.pageSource();
         closeWebDriver();
         AttachHelper.addVideo(sessionId);
