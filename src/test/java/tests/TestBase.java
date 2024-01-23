@@ -15,12 +15,13 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
 public class TestBase {
+    public static ConfigBase configBase;
 
     @BeforeAll
     static void beforeAll() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
-
+         configBase = new ConfigBase();
 
         Configuration.browser = MobileDriver.class.getName();
         Configuration.browserSize = null;

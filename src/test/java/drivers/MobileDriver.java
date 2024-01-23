@@ -3,6 +3,7 @@ package drivers;
 import com.codeborne.selenide.WebDriverProvider;
 import config.BrowserstackConfig;
 import config.ConfigBase;
+import config.ConfigBaseSingleton;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import org.aeonbits.owner.ConfigFactory;
@@ -13,17 +14,19 @@ import org.openqa.selenium.WebDriver;
 import javax.annotation.Nonnull;
 
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
+import static tests.TestBase.configBase;
 
 public class MobileDriver implements WebDriverProvider {
 
-    private static BrowserstackConfig config;
+//    private static BrowserstackConfig config;
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
+//        config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
 
-//        BrowserstackConfig config = new ConfigBase().getConfig();
+        BrowserstackConfig config = configBase.getConfig();
+//        ConfigBaseSingleton.getConfig();
 
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("project", "autotests.mobile");
