@@ -26,7 +26,8 @@ public class MobileDriver implements WebDriverProvider {
         caps.setCapability("project", "autotests.mobile");
         caps.setCapability("build", "jobBaseName");
         //capabilities.setCapability("name", "Tests - " + platform + " - " + buildNumber);
-        caps.setCapability("name", "Tests - on platform1 with buildNumber1");
+        caps.setCapability("name", "Tests - on " + config.osType() + " - " + "buildNumber");
+//        caps.setCapability("name", "Tests - on platform1 with buildNumber1");
         caps.setCapability("autoGrantPermissions", "true");
 
         caps.setCapability("deviceName", config.device());

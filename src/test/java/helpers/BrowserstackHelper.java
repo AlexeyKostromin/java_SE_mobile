@@ -13,7 +13,8 @@ public class BrowserstackHelper {
 
     public static URL getBrowserstackUrl() {
         try {
-            return new URL("https://" + config.user() + ":" + config.key() + "@hub.browserstack.com/wd/hub");
+//            return new URL("https://" + config.user() + ":" + config.key() + "@hub.browserstack.com/wd/hub");
+            return new URL("https://" + config.user() + ":" + config.key() + "@" +config.url());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
