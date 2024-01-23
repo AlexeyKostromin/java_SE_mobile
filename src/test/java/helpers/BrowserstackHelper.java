@@ -9,8 +9,7 @@ import static io.restassured.RestAssured.given;
 import static tests.TestBase.configBase;
 
 public class BrowserstackHelper {
-//    static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
-     static BrowserstackConfig config = configBase.getConfig();
+    static BrowserstackConfig config = configBase.getConfig();
 
     public static URL getBrowserstackUrl() {
         try {

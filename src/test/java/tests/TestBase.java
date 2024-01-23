@@ -21,17 +21,12 @@ public class TestBase {
     static void beforeAll() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
-         configBase = new ConfigBase();
+        configBase = new ConfigBase();
 
         Configuration.browser = MobileDriver.class.getName();
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
     }
-//    @BeforeAll
-//    static void beforeAll() {
-//        //DriverHelper.configureSelenide();
-//        DriverHelper.configureSelenide2();
-//    }
 
     @BeforeEach
     void beforeEach() {
