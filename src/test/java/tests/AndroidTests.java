@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Condition;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,7 @@ import static io.qameta.allure.Allure.step;
 public class AndroidTests extends TestBase {
     @Test
     @Tag("android")
+    @DisplayName("Search item")
     void successfulSearchTest() {
         final String searchRequest = "Appium";
 
@@ -30,6 +32,7 @@ public class AndroidTests extends TestBase {
 
     @Test
     @Tag("android")
+    @DisplayName("Search and open article, then go back")
     void openArticleByNameTest() {
         final String searchRequest = "Appium";
         final String articleToSelect = "Appius Claudius Caecus";
