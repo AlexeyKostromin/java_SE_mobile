@@ -58,6 +58,12 @@ task android(type: Test) {
     }
 }
 
+task androidLocal(type: Test) {
+    useJUnitPlatform {
+        includeTags("android_local")
+    }
+}
+
 task ios(type: Test) {
     useJUnitPlatform {
         includeTags("ios")

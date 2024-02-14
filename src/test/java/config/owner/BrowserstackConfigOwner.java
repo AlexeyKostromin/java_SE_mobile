@@ -1,4 +1,4 @@
-package config;
+package config.owner;
 
 import org.aeonbits.owner.Config;
 
@@ -6,13 +6,7 @@ import org.aeonbits.owner.Config;
         "classpath:${envMobile}.properties"
 })
 
-public interface BrowserstackConfig extends Config{
-        @Key("bsUser")
-        String user();
-
-        @Key("bsKey")
-        String key();
-
+public interface BrowserstackConfigOwner extends Config{
         @Key("mobileDevice")
         String device();
 

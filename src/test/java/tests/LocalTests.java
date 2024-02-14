@@ -12,9 +12,9 @@ import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.appium.java_client.AppiumBy.id;
 import static io.qameta.allure.Allure.step;
 
-public class LocalTests extends TestBase2 {
+public class LocalTests extends zTestBaseLocal {
     @Test
-    @Tag("android")
+    @Tag("android_local")
     @DisplayName("Search item")
     void successfulSearchTest() {
         final String searchRequest = "Appium";

@@ -1,20 +1,18 @@
 package helpers;
 
-import config.BrowserstackConfig;
+import config.BrowserstackConfigFull;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import static io.restassured.RestAssured.given;
-import static tests.TestBase.configBase;
 
 public class BrowserstackHelper {
-    static BrowserstackConfig config = configBase.getConfig();
+    static BrowserstackConfigFull browserstackConfigFull = BrowserstackConfigFull.getInstance();
 
     public static URL getBrowserstackUrl() {
         try {
-//            return new URL("https://" + config.user() + ":" + config.key() + "@hub.browserstack.com/wd/hub");
-            return new URL("https://" + config.user() + ":" + config.key() + "@" +config.url());
+            return new URL("https://" + browserstackConfigFull.userName + ":" + browserstackConfigFull.userKey + "@" + browserstackConfigFull.bsUrl);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -24,7 +22,7 @@ public class BrowserstackHelper {
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
         return given()
-                .auth().basic(config.user(), config.key())
+                .auth().basic(browserstackConfigFull.userName, browserstackConfigFull.userKey)
                 .when()
                 .get(url)
                 .then()

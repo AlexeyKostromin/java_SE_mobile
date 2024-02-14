@@ -2,7 +2,9 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import config.ConfigBase;
+import config.BrowserstackConfigFull;
+import config.LocalConfigFull;
+import drivers.LocalAndroidDriver;
 import drivers.MobileDriver;
 import helpers.AttachHelper;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -15,15 +17,39 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
 public class TestBase {
-    public static ConfigBase configBase;
+    public static BrowserstackConfigFull browserstackConfigFull;
+    public static LocalConfigFull localConfigFull;
+    public static String runtimeEnvironment;
 
     @BeforeAll
     static void beforeAll() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
-        configBase = new ConfigBase();
+        runtimeEnvironment = System.getProperty("runtimeEnv", "local");
 
-        Configuration.browser = MobileDriver.class.getName();
+        initConfig();
+        initDriver();
+    }
+
+    static void initConfig() {
+
+        if (runtimeEnvironment.equals("local")) {
+            localConfigFull = new LocalConfigFull();
+        } else if (runtimeEnvironment.equals("browserstack")) {
+            browserstackConfigFull = BrowserstackConfigFull.getInstance();
+        } else {
+            throw new RuntimeException("You need to specify runtimeEnv!");
+        }
+    }
+
+    static void initDriver() {
+        Configuration.browser = null;
+        if (runtimeEnvironment.equals("local")) {
+            Configuration.browser = LocalAndroidDriver.class.getName();
+        } else if (runtimeEnvironment.equals("browserstack")) {
+            Configuration.browser = MobileDriver.class.getName();
+        }
+
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
     }
@@ -43,6 +69,8 @@ public class TestBase {
         AttachHelper.pageSource();
         closeWebDriver();
 
-        AttachHelper.addVideo(sessionId);
+        if (runtimeEnvironment.equals("browserstack")){
+            AttachHelper.addVideoBrowserstack(sessionId);
+        }
     }
 }

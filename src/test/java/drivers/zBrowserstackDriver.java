@@ -2,7 +2,7 @@ package drivers;
 
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.BrowserstackConfig;
+import config.owner.BrowserstackConfigOwner;
 import io.appium.java_client.android.AndroidDriver;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
@@ -20,7 +20,7 @@ public class zBrowserstackDriver implements WebDriverProvider {
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities caps = new MutableCapabilities();
 
-        BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class, System.getProperties());
+        BrowserstackConfigOwner config = ConfigFactory.create(BrowserstackConfigOwner.class, System.getProperties());
 
         // Set URL of the application under test
         caps.setCapability("app", config.app());

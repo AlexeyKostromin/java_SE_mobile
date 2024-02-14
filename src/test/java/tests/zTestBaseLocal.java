@@ -1,10 +1,8 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import config.ConfigBase;
-import drivers.LocalDriver;
-import drivers.MobileDriver;
+import config.zConfigBase;
+import drivers.zLocalDriver;
 import helpers.AttachHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -15,16 +13,16 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
-public class TestBase2 {
-    public static ConfigBase configBase;
+public class zTestBaseLocal {
+    public static zConfigBase configBase;
 
     @BeforeAll
     static void beforeAll() {
         addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
-        configBase = new ConfigBase();
+        configBase = new zConfigBase();
 
-        Configuration.browser = LocalDriver.class.getName();
+        Configuration.browser = zLocalDriver.class.getName();
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
     }

@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static io.appium.java_client.AppiumBy.name;
 import static io.qameta.allure.Allure.step;
 
-public class IosTests extends TestBase {
+public class IosTests extends zTestBase {
 
     @Test
     @Tag("ios")
