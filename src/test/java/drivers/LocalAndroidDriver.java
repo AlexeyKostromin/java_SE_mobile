@@ -1,9 +1,12 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.owner.BrowserstackConfigOwner;
+import config.owner.LocalConfigOwner;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
@@ -21,24 +24,30 @@ import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 public class LocalAndroidDriver implements WebDriverProvider {
     UiAutomator2Options uiAutomator2Options;
+    static LocalConfigOwner localConfig;
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
 
-        //BrowserstackConfig config = configBase.getConfig();
-//        ConfigBaseSingleton.getConfig();
+        localConfig = ConfigFactory.create(LocalConfigOwner.class, System.getProperties());
 
         uiAutomator2Options = new UiAutomator2Options();
         UiAutomator2Options options = uiAutomator2Options;
 
         options.setAutomationName(ANDROID_UIAUTOMATOR2)
                 .setPlatformName(ANDROID)
-                .setPlatformVersion("14.0")
-                .setDeviceName("Pixel 6 API 34")
+                .setPlatformVersion(localConfig.osVersion())
+                .setDeviceName(localConfig.device())
                 .setApp(getAppPath())
-                .setAppPackage("org.wikipedia.alpha")               //get this from developer
-                .setAppActivity("org.wikipedia.main.MainActivity"); //get this from developer
+                .setAppPackage(localConfig.appPackage())      //get this from developer
+                .setAppActivity(localConfig.appActivity());   //get this from developer
+
+//                .setPlatformVersion("14.0")
+//                .setDeviceName("Pixel 6 API 34")
+//                .setApp(getAppPath())
+//                .setAppPackage("org.wikipedia.alpha")               //get this from developer
+//                .setAppActivity("org.wikipedia.main.MainActivity"); //get this from developer
 
         return new AndroidDriver(getAppiumServerUrl(), options);
     }
@@ -63,28 +72,11 @@ public class LocalAndroidDriver implements WebDriverProvider {
 
     public static URL getAppiumServerUrl() {
         try {
-            return new URL("http://localhost:4723/wd/hub");
+//            return new URL("http://localhost:4723/wd/hub");
+            return new URL("http://" + localConfig.url());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
     }
-//    public WebDriver getDriver(String platform){
-//        if (platform.equals("android")) {
-//            return getAndroidDriver(uiAutomator2Options);
-//        } else if (platform.equals("ios")) {
-//            return getIosDriver(uiAutomator2Options);
-//        } else {
-//            return null;
-//        }
-//    }
-
-//    public AndroidDriver getAndroidDriver(UiAutomator2Options options) {
-//        return new AndroidDriver(getBrowserstackUrl(), options);
-//    }
-//
-//    public IOSDriver getIosDriver(UiAutomator2Options options) {
-//        return new IOSDriver(getBrowserstackUrl(), options);
-//    }
-
 
 }

@@ -3,8 +3,9 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import config.BrowserstackConfigFull;
-import config.LocalConfigFull;
+//import config.LocalConfig;
 import drivers.LocalAndroidDriver;
+import drivers.LocalDriver;
 import drivers.MobileDriver;
 import helpers.AttachHelper;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -17,8 +18,8 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 
 public class TestBase {
-    public static BrowserstackConfigFull browserstackConfigFull;
-    public static LocalConfigFull localConfigFull;
+    //    public static BrowserstackConfigFull browserstackConfigFull;
+//    public static LocalConfig localConfig;
     public static String runtimeEnvironment;
 
     @BeforeAll
@@ -27,27 +28,29 @@ public class TestBase {
 
         runtimeEnvironment = System.getProperty("runtimeEnv", "local");
 
-        initConfig();
+//        initConfig();
         initDriver();
     }
 
-    static void initConfig() {
-
-        if (runtimeEnvironment.equals("local")) {
-            localConfigFull = new LocalConfigFull();
-        } else if (runtimeEnvironment.equals("browserstack")) {
-            browserstackConfigFull = BrowserstackConfigFull.getInstance();
-        } else {
-            throw new RuntimeException("You need to specify runtimeEnv!");
-        }
-    }
+//    static void initConfig() {
+//
+//        if (runtimeEnvironment.equals("local")) {
+//            localConfig = new LocalConfig();
+//        } else if (runtimeEnvironment.equals("browserstack")) {
+//            browserstackConfigFull = BrowserstackConfigFull.getInstance();
+//        } else {
+//            throw new RuntimeException("You need to specify runtimeEnv!");
+//        }
+//    }
 
     static void initDriver() {
         Configuration.browser = null;
         if (runtimeEnvironment.equals("local")) {
-            Configuration.browser = LocalAndroidDriver.class.getName();
+            Configuration.browser = LocalDriver.class.getName();
         } else if (runtimeEnvironment.equals("browserstack")) {
             Configuration.browser = MobileDriver.class.getName();
+        } else {
+            throw new RuntimeException("runtimeEnv is invalid!");
         }
 
         Configuration.browserSize = null;
@@ -69,7 +72,7 @@ public class TestBase {
         AttachHelper.pageSource();
         closeWebDriver();
 
-        if (runtimeEnvironment.equals("browserstack")){
+        if (runtimeEnvironment.equals("browserstack")) {
             AttachHelper.addVideoBrowserstack(sessionId);
         }
     }

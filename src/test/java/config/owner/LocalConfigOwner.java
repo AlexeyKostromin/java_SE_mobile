@@ -6,8 +6,8 @@ import org.aeonbits.owner.Config;
         "classpath:${envMobile}.properties"
 })
 
-public interface BrowserstackConfigOwner extends Config {
-    @Key("bsUrl")
+public interface LocalConfigOwner extends Config {
+    @Key("url")
     String url();
 
     @Key("osType")
@@ -19,7 +19,11 @@ public interface BrowserstackConfigOwner extends Config {
     @Key("mobileDevice")
     String device();
 
-    @Key("app")
-    String app();
+    @Key("appPackage")
+    String appPackage();
+
+    @Key("appActivity")
+    String appActivity();
+
 
 }

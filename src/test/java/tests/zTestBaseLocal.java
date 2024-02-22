@@ -2,7 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import config.zConfigBase;
-import drivers.zLocalDriver;
+import drivers.LocalDriver;
 import helpers.AttachHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -22,7 +22,7 @@ public class zTestBaseLocal {
 
         configBase = new zConfigBase();
 
-        Configuration.browser = zLocalDriver.class.getName();
+        Configuration.browser = LocalDriver.class.getName();
         Configuration.browserSize = null;
         Configuration.timeout = 10000;
     }

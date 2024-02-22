@@ -11,6 +11,7 @@ public class BrowserstackConfigFull {
     public final String userKey;
     public final String bsUrl;
     public final String osType;
+
     public final String osVersion;
     public final String mobileDevice;
 

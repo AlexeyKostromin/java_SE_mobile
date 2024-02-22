@@ -12,24 +12,24 @@ import static io.appium.java_client.AppiumBy.accessibilityId;
 import static io.appium.java_client.AppiumBy.id;
 import static io.qameta.allure.Allure.step;
 
-public class LocalTests extends zTestBaseLocal {
+public class LocalTests extends TestBase {
     @Test
     @Tag("android_local")
     @DisplayName("Search item")
     void successfulSearchTest() {
         final String searchRequest = "Appium";
 
-        step("onboarding screen1", () -> {
+        step("Pass onboarding screen1", () -> {
 //            $(accessibilityId("Search Wikipedia")).click();
             $(id("org.wikipedia.alpha:id/fragment_onboarding_forward_button")).click();
         });
-        step("onboarding screen2", () -> {
+        step("Pass onboarding screen2", () -> {
             $(id("org.wikipedia.alpha:id/fragment_onboarding_forward_button")).click();
         });
-        step("onboarding screen3", () -> {
+        step("Pass onboarding screen3", () -> {
             $(id("org.wikipedia.alpha:id/fragment_onboarding_forward_button")).click();
         });
-        step("onboarding screen4", () -> {
+        step("Pass onboarding screen4", () -> {
             $(id("org.wikipedia.alpha:id/acceptButton")).click();
         });
 
