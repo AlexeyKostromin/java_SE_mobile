@@ -64,6 +64,12 @@ task androidLocalTests(type: Test) {
     }
 }
 
+task androidLocalSRTests(type: Test) {
+    useJUnitPlatform {
+        includeTags("android_local_SR")
+    }
+}
+
 task iosTests(type: Test) {
     useJUnitPlatform {
         includeTags("ios")
