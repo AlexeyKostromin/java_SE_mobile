@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import tests.pages.DashboardPageSr;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -11,10 +12,28 @@ import static io.appium.java_client.AppiumBy.*;
 import static io.qameta.allure.Allure.step;
 
 public class LocalTestsSr extends TestBase {
+
+    DashboardPageSr homePageSr= new DashboardPageSr();
+
     @Test
     @Tag("android_local_SR")
     @DisplayName("Search item")
     void successfulSearchTest() {
+
+        homePageSr.permissionAllowBtn.click();
+        homePageSr.loginBtn.click();
+        homePageSr.loginWithCredentials("o.kostromin@sportradar.com" , "OKwarsaw100@");
+        homePageSr.skipIntro();
+
+        homePageSr.goToProfileSettings();
+        homePageSr.setSportBasketball();
+        homePageSr.goBackToDashboardPage();
+    }
+
+    @Test
+    @Tag("android_local_SR1")
+    @DisplayName("Search item")
+    void successfulSearchTest1() {
         final String searchRequest = "Appium";
         step("Allow notifications", () -> {
             $(id("com.android.permissioncontroller:id/permission_allow_button")).click();
