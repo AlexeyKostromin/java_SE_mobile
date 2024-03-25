@@ -39,8 +39,8 @@ public class LocalDriverSR implements WebDriverProvider {
                 .setDeviceName(localConfig.device())
                 .setApp(getAppPath())
                 .setAppPackage(localConfig.appPackage())      //get this from developer
-                .setAppActivity(localConfig.appActivity());   //get this from developer
-
+                .setAppActivity(localConfig.appActivity())    //get this from developer
+                .setCapability("appium:disableIdLocatorAutocompletion", true);
         return getDriver();
     }
 

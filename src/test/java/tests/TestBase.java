@@ -6,6 +6,7 @@ import config.BrowserstackConfigFull;
 //import config.LocalConfig;
 import drivers.LocalAndroidDriver;
 import drivers.LocalDriver;
+import drivers.LocalDriverSR;
 import drivers.MobileDriver;
 import helpers.AttachHelper;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -45,12 +46,11 @@ public class TestBase {
 
     static void initDriver() {
         Configuration.browser = null;
-        if (runtimeEnvironment.equals("local")) {
-            Configuration.browser = LocalDriver.class.getName();
-        } else if (runtimeEnvironment.equals("browserstack")) {
-            Configuration.browser = MobileDriver.class.getName();
-        } else {
-            throw new RuntimeException("runtimeEnv is invalid!");
+        switch (runtimeEnvironment) {
+            case "local" -> Configuration.browser = LocalDriver.class.getName();
+            case "browserstack" -> Configuration.browser = MobileDriver.class.getName();
+            case "localDriverSR" -> Configuration.browser = LocalDriverSR.class.getName();
+            default -> throw new RuntimeException("runtimeEnv is invalid!");
         }
 
         Configuration.browserSize = null;

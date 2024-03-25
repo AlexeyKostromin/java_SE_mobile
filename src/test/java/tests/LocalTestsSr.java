@@ -5,13 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static io.appium.java_client.AppiumBy.*;
 import static io.qameta.allure.Allure.step;
 
-public class LocalTestsSR extends TestBase {
+public class LocalTestsSr extends TestBase {
     @Test
     @Tag("android_local_SR")
     @DisplayName("Search item")
@@ -21,25 +20,37 @@ public class LocalTestsSR extends TestBase {
             $(id("com.android.permissioncontroller:id/permission_allow_button")).click();
         });
         step("Click Login", () -> {
-            $(accessibilityId("LOG IN")).click();
-//            $(id("login-button")).click();
+            $(id("login-button")).click();
         });
 
         step("Username and password", () -> {
-//            $(id("Username")).click();
-            $(xpath("//android.widget.EditText[@resource-id=\"Username\"]")).click();
-            $(xpath("//android.widget.EditText[@resource-id=\"Username\"]")).sendKeys("o.kostromin@sportradar.com");
-//            $(accessibilityId("android.widget.EditText")).sendKeys("user2");
-//            $(id("Password")).click();
-            $(xpath("//android.widget.EditText[@resource-id=\"Password\"]")).click();
-            $(xpath("//android.widget.EditText[@resource-id=\"Password\"]")).sendKeys("OKwarsaw100@");
-//            $(id("com.android.chrome:id/signin_fre_dismiss_button")).click();
-            $(xpath("//android.widget.Button[@text=\"Login\"]")).click();
+            $(id("Username")).click();
+            $(id("Username")).sendKeys("o.kostromin@sportradar.com");;
+
+            $(id("Password")).click();
+            $(id("Password")).sendKeys("OKwarsaw100@");
+            $(xpath("//*[@text='Login']")).click();
         });
-        step("Skip for bow", () -> {
-            $(xpath("//android.widget.TextView[@text=\"Skip for now\"]")).click();
-            $(xpath("//android.view.ViewGroup[@content-desc=\"DIVE STRAIGHT IN\"]")).click();
+        step("Skip for now", () -> {
+            $(xpath("//*[@text='Skip for now']")).click();
+            $(id("DiveStraightInButton")).click();
         });
+
+//menu button = drawerId
+        $(id("drawerId")).click();
+        $(xpath("//*[@text='SETTINGS']")).click();
+        $(xpath("//*[@text='Profile Settings']")).click();
+        $(id("textInput")).click();
+
+        $(xpath("//*[@text='Basketball']")).click();
+        $(xpath("//*[@text='SAVE']")).click();
+        $(xpath("//*[@content-desc='Go back']")).click();
+
+        //close manu
+        $(id("drawerId")).click();
+        //click Games
+        $(id("GamesActionItem")).click();
+
 
 //        step("Pass onboarding screen2", () -> {
 //            $(id("org.wikipedia.alpha:id/fragment_onboarding_forward_button")).click();

@@ -38,8 +38,9 @@ public class LocalRealAndroidDriverSR implements WebDriverProvider {
                 .setDeviceName(localConfig.device())
                 .setApp(getAppPath())
                 .setAppPackage(localConfig.appPackage())      //get this from developer
-                .setAppActivity(localConfig.appActivity());   //get this from developer
-
+                .setAppActivity(localConfig.appActivity())   //get this from developer
+                .setCapability("appium:disableIdLocatorAutocompletion", true);
+//appium:disableIdLocatorAutocompletion
 //                .setPlatformVersion("14.0")
 //                .setDeviceName("Pixel 6 API 34")
 //                .setApp(getAppPath())
@@ -48,7 +49,6 @@ public class LocalRealAndroidDriverSR implements WebDriverProvider {
 
         return new AndroidDriver(getAppiumServerUrl(), options);
     }
-
 
 
     private String getAppPath() {
