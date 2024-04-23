@@ -15,6 +15,9 @@ public class LocalTestsSr extends TestBase {
 
     DashboardPageSr homePageSr= new DashboardPageSr();
 
+    String USERNAME = "green-basketball-men-ak-01@mailinator.com";
+    String PASSWORD = "BasketBallD@01";
+
     @Test
     @Tag("android_local_SR")
     @DisplayName("Search item")
@@ -22,7 +25,7 @@ public class LocalTestsSr extends TestBase {
 
         homePageSr.permissionAllowBtn.click();
         homePageSr.loginBtn.click();
-        homePageSr.loginWithCredentials("o.kostromin@sportradar.com" , "OKwarsaw100@");
+        homePageSr.loginWithCredentials(USERNAME , PASSWORD);
         homePageSr.skipIntro();
 
         homePageSr.goToProfileSettings();
